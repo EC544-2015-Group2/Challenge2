@@ -20,7 +20,9 @@ client.on('message', function (topic, message) {
 		message = JSON.parse(message);
 		console.log(message);
 	}	
-	catch(err) console.log('Error parsing JSON: ' + err);
+ 	catch(err){ 
+		console.log('Error parsing JSON: ' + err);
+	}
 	client.end();
 });
 
