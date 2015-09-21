@@ -1,14 +1,23 @@
 var mqtt = require('mqtt');
 var client = mqtt.connect('mqtt://test.mosquitto.org');
+var array1 = [0,1,2,3,4,5,6,7,8,9];
+var object = {type: 'test', value: 0, array: array1};
+var string = 'Hello mqtt test for Challenge 2';
+
+// stringify the data before publishing it
+var publishMessage = JSON.stringify(object);
 
 client.on('connect', function() {
-	client.subscribe('presence');
-	client.publish('presence', 'Hello mqtt test for Challenge 2');
+	client.subscribe('EC544Group2_Challenge2');
+	client.publish('EC544Group2_Challenge2', publishMessage);
+	// console.log(JSON.stringify(array1));
 });
 
 client.on('message', function (topic, message) {
 	// message is Buffer
-	console.log(message.toString());
+	message = message.toString();
+	message = JSON.parse(message);
+	console.log(message);
 	client.end();
 });
 
