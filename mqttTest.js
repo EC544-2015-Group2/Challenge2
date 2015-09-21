@@ -16,8 +16,11 @@ client.on('connect', function() {
 client.on('message', function (topic, message) {
 	// message is Buffer
 	message = message.toString();
-	message = JSON.parse(message);
-	console.log(message);
+	try{
+		message = JSON.parse(message);
+		console.log(message);
+	}	
+	catch(err) console.log('Error parsing JSON: ' + err);
 	client.end();
 });
 
