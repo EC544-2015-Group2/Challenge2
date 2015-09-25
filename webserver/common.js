@@ -1,1 +1,0 @@
-Temperatures = new Meteor.Collection('temperatures');
