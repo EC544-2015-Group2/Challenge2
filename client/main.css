@@ -8,13 +8,14 @@ html {
 }
 */
 .navbar {
-	margin-bottom: 0px;
+	/*margin-bottom: 0px;*/
 	border-radius: 0 !important;
+	margin-bottom: 0px;
 }
 
 .jumbotron {
-	height: 90%;
-	margin-bottom: 0px;
+	margin: 0px;
+	padding: 0px;
 }
 
 .footer {
@@ -27,4 +28,9 @@ html {
 
 .text-muted {
 	margin: 10px 0;
+}
+
+.chart {
+	width: 100%;
+	height: 600px;
 }
