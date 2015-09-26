@@ -36,7 +36,7 @@ MongoClient.connect(mongoURL, function(err, db) {
                             deviceList.push(deviceID);
                             io.emit('newColumn', JSON.stringify({
                                 type: 'number',
-                                label: String(deviceID)
+                                label: deviceID
                             }));
                         }
                     });
