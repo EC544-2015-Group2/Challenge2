@@ -7,8 +7,6 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="/main.css">
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <!-- include GoogleCharts -->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <title>Temperature data visualization</title>
@@ -38,7 +36,58 @@
         </div>
     </nav>
     <div class="jumbotron">
-        <div class="container">
+        <div data-ride="carousel" id="carousel-graph" class="carousel slide">
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-graph" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-graph" data-slide-to="1"></li>
+                <li data-target="#carousel-graph" data-slide-to="2"></li>
+            </ol>
+            <div role="listbox" class="carousel-inner">
+                <div class="item active">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div id="day-chart" class="chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-caption">
+                        <h3>Day</h3>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div id="week-chart" class="chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-caption">
+                        <h3>Week</h3>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div id="month-chart" class="chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-caption">
+                        <h3>Month</h3>
+                    </div>
+                </div>
+            </div>
+            <a href="#carousel-graph" role="button" data-slide="prev" class="left carousel-control">
+                <span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a href="#carousel-graph" role="button" data-slide="next" class="right carousel-control">
+                <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
     </div>
     <!-- 
@@ -61,12 +110,10 @@
         </div>
     </footer>
     <script src="main.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-        $('#txtStart').datepicker();
-        $('#txtEnd').datepicker();
-    });
-    </script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 
 </html>
