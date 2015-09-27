@@ -7,8 +7,8 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="/main.css">
-    <!-- include GoogleCharts -->
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/dygraph/1.1.1/dygraph-combined.js"></script>
     <title>Temperature data visualization</title>
 </head>
 
@@ -28,92 +28,23 @@
                         <a href="/dashboard.html">Dashboard
                     <span class="sr-only">(current)</span></a>
                     </li>
-                    <li>
-                        <a href="/historical.html">Historical Data</a>
-                    </li>
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="jumbotron">
-        <div data-ride="carousel" id="carousel-graph" class="carousel slide">
-            <ol class="carousel-indicators">
-                <li data-target="#carousel-graph" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel-graph" data-slide-to="1"></li>
-                <li data-target="#carousel-graph" data-slide-to="2"></li>
-            </ol>
-            <div role="listbox" class="carousel-inner">
-                <div class="item active">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-9">
-                                <div id="day-chart" class="chart"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-caption">
-                        <h3>Day</h3>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-9">
-                                <div id="week-chart" class="chart"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-caption">
-                        <h3>Week</h3>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-9">
-                                <div id="month-chart" class="chart"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-caption">
-                        <h3>Month</h3>
-                    </div>
-                </div>
-            </div>
-            <a href="#carousel-graph" role="button" data-slide="prev" class="left carousel-control">
-                <span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a href="#carousel-graph" role="button" data-slide="next" class="right carousel-control">
-                <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
+    <div class="graph-container">
+        <div id="graph"></div>
     </div>
-    <!-- 
-                <div class="panel-body">
-                    <div id="dvDatePicker" style="display: none">
-                        From
-                        <input type="text" id="txtStart"> to
-                        <input type="text" id="txtEnd">
-                        <input type="button" class="btn btn-success" value="Show" onclick="getDataWithinRange()">
-                    </div>
-                    <br>
-                    <div id="chart_lines" style="width: 1150px; height: 500px;" class="col-lg-8"></div>
-                </div>
-            </div>
-        </div>
-    </div> -->
     <footer class="footer">
         <div class="container">
             <p class="text-muted">Developed by EC544 Group 2</p>
         </div>
     </footer>
-    <script src="main.js"></script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="dashboard.js"></script>
 </body>
 
 </html>
