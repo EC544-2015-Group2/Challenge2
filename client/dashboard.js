@@ -1,5 +1,6 @@
 var socket = io();
 var data = [];
+var graph = null;
 
 $(document).ready(function() {
     var query = {
@@ -10,10 +11,14 @@ $(document).ready(function() {
     };
     socket.emit('query', JSON.stringify(query));
     socket.on('data', function(message) {
-        data = data.concat(JSON.parse(message).map(function(row) {
-            return [new Date(row[0])].concat(row.slice(1));
-        }));
-        new Dygraph(
+    	console.log(JSON.parse(message));
+        if (JSON.parse(message).length === 2)
+            data = data.concat([formatDataRow(JSON.parse(message))]);
+        else
+            data = data.concat(JSON.parse(message).map(formatDataRow));
+
+
+        if (!graph) graph = new Dygraph(
             document.getElementById('graph'), data, {
                 labels: ['Date', 'Temperature'],
                 labelsDivStyles: {
@@ -28,5 +33,12 @@ $(document).ready(function() {
                 ylabel: 'Temperature (C)',
                 legend: 'always'
             });
+        else graph.updateOptions({
+            'file': data
+        });
     });
 });
+
+function formatDataRow(row) {
+    return [new Date(row[0])].concat(row.slice(1));
+};
