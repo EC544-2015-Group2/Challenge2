@@ -1,0 +1,22 @@
+{
+  "name": "challenge2",
+  "version": "0.0.1",
+  "description": "Challenge 2 of EC544 Fall 2015 by Group 2",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EC544-2015-Group2/Challenge2.git"
+  },
+  "author": "ghirlekar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EC544-2015-Group2/Challenge2/issues"
+  },
+  "homepage": "https://github.com/EC544-2015-Group2/Challenge2#readme",
+  "dependencies": {
+    "mqtt": "^1.4.1"
+  }
+}
