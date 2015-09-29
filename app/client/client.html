@@ -1,0 +1,64 @@
+<head>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/dygraph/1.1.1/dygraph-combined.js"></script>
+    <title>Temperature data visualization</title>
+</head>
+
+<body>
+    {{> header}} {{> graph}} {{> footer}}
+</body>
+<template name='header'>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <button type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" class="navbar-toggle collapsed">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand">Visualization</a>
+            <div class="collapse navbar-collapse" id="navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active">
+                        <a href="/dashboard.html">Dashboard
+                    <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</template>
+<template name="graph">
+    <div class="graph-container">
+        <div id="graph"></div>
+        <div class="btn-group btn-group-justified" data-toggle="buttons">
+            <label class="btn btn-primary active">
+                <input type="radio" name="dateRange" id="hour" autocomplete="off" checked>Hour
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="dateRange" id="day" autocomplete="off">Day
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="dateRange" id="week" autocomplete="off">Week
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="dateRange" id="month" autocomplete="off">Month
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="dateRange" id="year" autocomplete="off">Year
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="dateRange" id="all" autocomplete="off">All
+            </label>
+        </div>
+    </div>
+    {{#unless Template.subscriptionsReady}}
+    <div class="loading">{{>spinner}}</div>
+    {{/unless}}
+</template>
+<template name="footer">
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">Developed by EC544 Group 2</p>
+        </div>
+    </footer>
+</template>

@@ -1,6 +1,6 @@
 var mqtt = require('mqtt');
-var mqttURL = 'mqtt://broker.mqtt-dashboard.com',
-    mqttTopic = 'EC544-Group2-Challenge1/temperature/';
+var mqttURL = 'mqtt://broker.mqttdashboard.com',
+    mqttTopic = 'EC544Group2_Challenge2';
 
 var numDevices = 4;
 var deviceList = [];
