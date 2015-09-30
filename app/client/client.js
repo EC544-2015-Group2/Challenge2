@@ -1,28 +1,7 @@
 Template.graph.events({
     'click .btn': function(e) {
         e.preventDefault();
-        var startDate = new Date();
-        switch ($(e.target).children()[0].id) {
-            case 'hour':
-                startDate.setHours(startDate.getHours() - 1);
-                break;
-            case 'day':
-                startDate.setDate(startDate.getDate() - 1);
-                break;
-            case 'week':
-                startDate.setDate(startDate.getDate() - 7);
-                break;
-            case 'month':
-                startDate.setMonth(startDate.getMonth() - 1);
-                break;
-            case 'year':
-                startDate.setYear(startDate.getYear() - 1);
-                break;
-            case 'all':
-                startDate.setTime(0);
-        }
-        Template.instance().startDate.set(startDate.getTime());
-        console.log(Template.instance().startDate.get());
+        setInterval(setGraphWindow($(e.target).children()[0].id, Template.instance().graph), 1000);
     }
 });
 
@@ -31,17 +10,10 @@ Template.graph.onCreated(function() {
     var instance = this;
 
     instance.startDate = new ReactiveVar(Date.now() - 60 * 60 * 1000);
-
-    instance.autorun(function() {
-        instance.subscription = instance.subscribe('temperatures');
-    });
+    instance.subscription = instance.subscribe('temperatures');
 
     instance.temperatures = function() {
-        return Temperatures.find({
-            time: {
-                $gt: instance.startDate.get()
-            }
-        }).map(function(doc) {
+        return Temperatures.find().map(function(doc) {
             var values = doc.temperatures.map(getValues);
             return [new Date(doc.time), [average(values), standardDeviation(values)]];
         });
@@ -69,15 +41,36 @@ Template.graph.onRendered(function() {
                     legend: 'always'
                 });
         } else {
-            // console.log(instance.temperatures().slice(0,1));
             if (instance.subscription.ready())
                 instance.graph.updateOptions({
                     'file': instance.temperatures(),
-                    dateWindow: null
                 });
         }
     });
 });
+
+function setGraphWindow(windowDuration, graph) {
+    var dateWindow;
+    switch (windowDuration) {
+        case 'hour':
+            dateWindow = [new Date().setHours(new Date().getHours() - 1), new Date()];
+            break;
+        case 'day':
+            dateWindow = [new Date().setDate(new Date().getDate() - 1), new Date()];
+            break;
+        case 'week':
+            dateWindow = [new Date().setDate(new Date().getDate() - 7), new Date()];
+            break;
+        case 'month':
+            dateWindow = [new Date().setMonth(new Date().getMonth() - 1), new Date()];
+            break;
+        case 'all':
+            dateWindow = null;
+    }
+    graph.updateOptions({
+        dateWindow: dateWindow
+    });
+}
 
 function getValues(item) {
     return item.value;
