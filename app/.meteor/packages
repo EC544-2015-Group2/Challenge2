@@ -21,3 +21,6 @@ twbs:bootstrap
 perak:mqtt-collection
 reactive-var
 sacha:spin
+iron:router
+ejson
+d3js:d3

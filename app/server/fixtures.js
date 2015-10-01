@@ -1,13 +1,4 @@
-var Fiber = Npm.require('fibers');
-var mqttUrl = 'mqtt://broker.mqttdashboard.com',
-    mqttTopic = 'EC544Group2_Challenge2';
-
-
-Meteor.startup(function() {
-    Meteor.publish('temperatures', function() {
-        return Temperatures.find();
-    });
-    if (Temperatures.find().count() === 0) {
+if (Temperatures.find().count() === 0) {
         var endDate = Date.now(),
             startDate = endDate - (30 * 24 * 60 * 60 * 1000);
 
@@ -26,18 +17,3 @@ Meteor.startup(function() {
             });
         }
     }
-});
-
-
-var mqttClient = mqtt.connect(mqttUrl);
-mqttClient.on('connect', function() {
-    console.log('MQTT connected');
-    mqttClient.subscribe(mqttTopic);
-});
-
-mqttClient.on('message', function(topic, message) {
-    Fiber(function() {
-        console.log('Message received')
-        Temperatures.insert(JSON.parse(message.toString()));
-    }).run()
-});

@@ -1,16 +1,20 @@
 Template.graph.events({
     'click .btn': function(e) {
         e.preventDefault();
-        setInterval(setGraphWindow($(e.target).children()[0].id, Template.instance().graph), 1000);
+        if (e.target.firstElementChild.id === 'liveUpdate') {
+            if (e.target.className.indexOf('active') < 0)
+                Template.instance().heartbeatInterval = Meteor.setInterval(function() {
+                    Session.set('graphHeartbeat', Date.now());
+                }, 500);
+            else
+                Meteor.clearInterval(Template.instance().heartbeatInterval);
+        } else
+            setGraphWindow(e.target.firstElementChild.id, Template.instance().graph);
     }
 });
 
-
 Template.graph.onCreated(function() {
     var instance = this;
-
-    instance.startDate = new ReactiveVar(Date.now() - 60 * 60 * 1000);
-    instance.subscription = instance.subscribe('temperatures');
 
     instance.temperatures = function() {
         return Temperatures.find().map(function(doc) {
@@ -36,16 +40,26 @@ Template.graph.onRendered(function() {
                     showRoller: true,
                     errorBars: true,
                     fillAlpha: 0.25,
+                    dateWindow: [Date.now() - 60 * 60 * 1000, Date.now()],
                     showRangeSelector: true,
                     ylabel: 'Temperature (C)',
-                    legend: 'always'
+                    legend: 'always',
                 });
         } else {
-            if (instance.subscription.ready())
-                instance.graph.updateOptions({
-                    'file': instance.temperatures(),
-                });
+            console.log('Updating graph')
+            instance.graph.updateOptions({
+                'file': instance.temperatures(),
+            });
         }
+    });
+
+    instance.autorun(function() {
+        Session.get('graphHeartbeat');
+        console.log('Updating document window')
+        var dateWindow = instance.graph.getOption('dateWindow');
+        instance.graph.updateOptions({
+            dateWindow: [new Date(dateWindow[0]).getTime() + 500, new Date(dateWindow[1]).getTime() + 500]
+        });
     });
 });
 
@@ -64,8 +78,6 @@ function setGraphWindow(windowDuration, graph) {
         case 'month':
             dateWindow = [new Date().setMonth(new Date().getMonth() - 1), new Date()];
             break;
-        case 'all':
-            dateWindow = null;
     }
     graph.updateOptions({
         dateWindow: dateWindow

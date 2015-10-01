@@ -1,0 +1,24 @@
+<template name="graph">
+    <div id="graph"></div>
+    <div class="btn-toolbar">
+        <div class="btn-group" role="group" data-toggle="buttons">
+            <label class="btn btn-primary active">
+                <input type="radio" name="dateRange" id="hour" autocomplete="off">Hour
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="dateRange" id="day" autocomplete="off">Day
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="dateRange" id="week" autocomplete="off">Week
+            </label>
+            <label class="btn btn-primary">
+                <input type="radio" name="dateRange" id="month" autocomplete="off">Month
+            </label>
+        </div>
+        <div class="btn-group" role="group" data-toggle="buttons">
+            <label class="btn btn-primary">
+                <input type="checkbox" id="liveUpdate" autocomplete="off">Live Update
+            </label>
+        </div>
+    </div>
+</template>
